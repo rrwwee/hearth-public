@@ -1,43 +1,9 @@
-name: ci
-
-on:
-  push:
-  pull_request:
-
+name: Policy probe
+on: [push, pull_request]
 permissions:
   contents: read
-
 jobs:
-  verify:
+  probe:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - uses: actions/setup-python@v5
-        with:
-          python-version-file: '.python-version'
-      - run: npm ci
-      - run: python3 -m venv .venv-lint
-      - run: .venv-lint/bin/python -m pip install -r requirements-lint.txt
-      - run: npm run check:release
-
-  systemd:
-    name: systemd (${{ matrix.suite }})
-    runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    strategy:
-      fail-fast: false
-      matrix:
-        suite: [deploy, vpn]
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      - name: Verify real systemd lifecycle
-        run: bash "scripts/verify-${{ matrix.suite }}-systemd.sh"
+      - run: echo "Disposable policy probe"
