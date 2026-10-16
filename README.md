@@ -4,7 +4,7 @@ Hearth is a Raspberry Pi and compute-cluster dashboard for device presence, host
 
 This public snapshot demonstrates the dashboard with fictional data. Live-capable source and its tests are included for inspection; helping readers operate their own live installation is outside the scope of this snapshot.
 
-![Hearth demo dashboard](docs/hearth-demo.png)
+![Hearth demo dashboard](docs/hearth-demo.jpg)
 
 ## Try the demo
 

@@ -22,7 +22,7 @@ body {
 
 body {
   color: var(--terminal);
-  background: #080604;
+  background: #000;
   overflow: hidden;
 }
 
@@ -106,15 +106,13 @@ textarea {
 .stage {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 52% 58%, rgba(226, 107, 24, 0.68) 0 8%, rgba(106, 37, 17, 0.52) 19%, transparent 42%),
-    radial-gradient(ellipse at 18% 32%, rgba(126, 42, 20, 0.42), transparent 36%),
-    linear-gradient(135deg, #100805 0%, #050403 48%, #160905 100%);
+  background: #000;
 }
 
 .background-video,
 .background-shade,
 .ambient-glow {
+  display: none;
   position: absolute;
   inset: 0;
   pointer-events: none;

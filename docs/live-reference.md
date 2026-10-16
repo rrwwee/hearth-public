@@ -331,7 +331,7 @@ container and exercises real user-service activation and recovery. The latter
 requires Docker; its runtime has no external network, published ports or host
 mounts, and starts only fixture services.
 
-The optional household video is intentionally not distributed. A private deployment may place a licensed `public/background.mp4`; the public demo uses the built-in CSS hearth treatment when it is absent.
+The optional household video is intentionally not distributed. This public snapshot uses a plain black background and hides the video, shading, and glow layers.
 
 ## Security and privacy model
 
