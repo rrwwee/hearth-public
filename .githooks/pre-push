@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "pre-push: full check:release (lint, syntax, tests, public-tree + history audits)"
+npm run --silent check:release

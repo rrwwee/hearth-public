@@ -1,0 +1,30 @@
+{
+  "name": "hearth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare": "git rev-parse --is-inside-work-tree >/dev/null 2>&1 && git config core.hooksPath .githooks || true",
+    "start": "node server.js",
+    "demo": "node server.js",
+    "start:live": "node --env-file=.env server.js",
+    "validate:live": "HEARTH_VALIDATE_ONLY=1 node server.js",
+    "test": "node --test && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s test -p 'test_*.py'",
+    "audit:public": "node scripts/audit-public-tree.mjs",
+    "audit:history": "node scripts/audit-git-history.mjs",
+    "check:syntax": "node scripts/check-syntax.mjs",
+    "check": "npm run check:syntax && npm test && npm run audit:public",
+    "lint": "node scripts/lint.mjs",
+    "handoff": "node scripts/handoff.mjs",
+    "check:release": "npm run lint && npm run check && npm run audit:history",
+    "verify:deploy-systemd": "bash scripts/verify-deploy-systemd.sh"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.12.0",
+    "globals": "17.13.0"
+  }
+}

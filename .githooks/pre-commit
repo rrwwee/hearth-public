@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "pre-commit: syntax + public-tree audit"
+npm run --silent check:syntax
+npm run --silent audit:public

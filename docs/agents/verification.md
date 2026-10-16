@@ -1,0 +1,15 @@
+# Verification and publication policy
+
+Follow the [README setup](../../README.md#verification). Run preflight in the environment that will run the checks. For an unpublished local candidate, `bash scripts/preflight.sh --mode local --systemd` verifies prerequisites without claiming remote freshness. Once public `origin/main` exists, ordinary development requires `bash scripts/preflight.sh --systemd` and inclusion of the current remote base. Do not attach private repository history to this snapshot.
+
+Run `npm run check:release` and both isolated systemd checks before publication. The pre-push hook runs the release check but does not replace the systemd checks. Run the relevant systemd suite for deployment or VPN lifecycle changes. An unavailable test remains an explicit gap; private-source CI results do not verify a transformed public candidate.
+
+The systemd suites require Docker and use disposable Linux containers with synthetic configuration. Builds need network access to fetch images/packages; test containers have network access disabled, private namespaces, no host devices or Docker socket, and SYS_ADMIN plus relaxed seccomp/AppArmor for their private systemd hierarchy. The VPN suite mounts only its generated synthetic fixture directory read-only. They do not verify a real VPN, cluster, or installation.
+
+Before publication, run both repository-specific audits plus a general credential scanner across the final tree and every intended public ref/history. The built-in history audit follows HEAD and skips large/binary contents; inspect those files, author/committer metadata, assets, and scan limitations separately. Record findings by category/path without copying secret values. Preserve required notices, runtime/test dependencies, and frozen compatibility fixtures.
+
+The workflow's unconditional jobs are `verify`, `systemd (deploy)`, and `systemd (vpn)`. The [main ruleset proposal](../main-ruleset.json) requires a pull request, strict freshness, and all three checks from GitHub Actions (app ID 15368), with no standing bypass. It is only a proposal until authorized settings changes and independent remote verification establish enforcement.
+
+Before merging, inspect the exact PR head, successful execution of all three checks, freshness against current main, and effective branch rules. Read `gh api repos/rrwwee/hearth-public/rules/branches/main`, repository and inherited rulesets, and any classic branch protection. Missing, pending, failing, cancelled, unavailable, skipped, or neutral check results do not establish successful execution. Do not weaken enforcement for an outage or test rejected merges against main. Applying settings, merging, publishing, and deploying require their own authorization.
+
+For a local export handoff, record the exact candidate revision, independent Standards/Spec reviews, local verification, scans, and remaining remote gates. Keep detailed private-to-public provenance and internal review records outside this public tree. See [handoff guidance](handoff.md). Neither a local handoff nor an exported settings proposal establishes publication completion.
