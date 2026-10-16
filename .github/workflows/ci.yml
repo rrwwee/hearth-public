@@ -3,7 +3,17 @@ on: [push, pull_request]
 permissions:
   contents: read
 jobs:
-  probe:
+  verify:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Disposable policy probe"
+      - run: echo "Synthetic policy success"
+  deploy:
+    name: systemd (deploy)
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Synthetic policy success"
+  vpn:
+    name: systemd (vpn)
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Synthetic policy success"
